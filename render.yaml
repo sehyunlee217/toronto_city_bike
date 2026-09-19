@@ -1,0 +1,40 @@
+services:
+  - type: web
+    name: city-bike
+    runtime: docker
+    plan: 0.5c-512mb
+    numInstances: 1
+    healthCheckPath: /health
+    maxShutdownDelaySeconds: 120
+    envVars:
+      - key: COLLECTOR_ENABLED
+        value: "true"
+      - key: KAFKA_BOOTSTRAP_SERVERS
+        sync: false
+      - key: KAFKA_API_KEY
+        sync: false
+      - key: KAFKA_API_SECRET
+        sync: false
+      - key: KAFKA_OBSERVATIONS_TOPIC
+        value: station-observations-v2
+      - key: KAFKA_METADATA_TOPIC
+        value: station-metadata
+      - key: POLL_INTERVAL_SECONDS
+        value: "60"
+      - key: H3_RESOLUTION
+        value: "8"
+
+      - key: HISTORY_ENABLED
+        value: "true"
+      - key: S3_HISTORY_BUCKET
+        sync: false
+      - key: S3_OBSERVATIONS_PREFIX
+        value: topics/station-observations-v2/
+      - key: S3_METADATA_PREFIX
+        value: topics/station-metadata/
+      - key: AWS_DEFAULT_REGION
+        value: us-east-2
+      - key: AWS_ACCESS_KEY_ID
+        sync: false
+      - key: AWS_SECRET_ACCESS_KEY
+        sync: false

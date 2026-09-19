@@ -1,11 +1,24 @@
 [project]
 name = "city-bike"
 version = "0.1.0"
-description = "Add your description here"
+description = "Toronto City Bike Analytics Engine"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "boto3>=1.35,<2",
+    "confluent-kafka>=2.6,<3",
+    "fastapi>=0.116.1",
+    "h3>=4.3.1",
+    "httpx>=0.28.1",
     "psycopg>=3.3.4",
     "psycopg-binary>=3.3.4",
-    "requests>=2.34.2",
+    "uvicorn>=0.35.0",
 ]
+
+[project.scripts]
+city-bike = "city_bike.service:main"
+city-bike-topic = "city_bike.topics:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

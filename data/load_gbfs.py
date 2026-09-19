@@ -1,6 +1,6 @@
 import os
+import httpx
 import psycopg
-import requests
 from psycopg.types.json import Jsonb
 
 STATION_INFORMATION_URL = (
@@ -14,7 +14,7 @@ DATABASE_URL = os.getenv(
 
 
 def fetch_json(url):
-    response = requests.get(url, timeout=10)
+    response = httpx.get(url, timeout=10)
     response.raise_for_status()
     return response.json()
 
